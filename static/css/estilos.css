@@ -1,0 +1,55 @@
+/* Paleta de colores Todo Bonito */
+:root {
+    --rosa-pastel: #F7D6D0;
+    --rosa-oscuro: #E2B4AC;
+    --marron-suave: #9C8470;
+    --marron-oscuro: #5C4B40;
+    --fondo-claro: #FAF6F0;
+}
+
+body {
+    background-color: var(--fondo-claro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--marron-oscuro);
+}
+
+/* Ajustes del menú */
+.navbar-custom {
+    background-color: var(--rosa-pastel) !important;
+    border-bottom: 2px solid var(--rosa-oscuro);
+}
+
+.navbar-custom .navbar-brand, 
+.navbar-custom .nav-link {
+    color: var(--marron-oscuro) !important;
+    font-weight: 600;
+}
+
+.navbar-custom .nav-link:hover {
+    color: var(--marron-suave) !important;
+}
+
+/* Botones personalizados */
+.btn-bonito {
+    background-color: var(--marron-suave);
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-bonito:hover {
+    background-color: var(--marron-oscuro);
+    color: white;
+}
+
+/* Tarjetas y secciones */
+.card-bonita {
+    background-color: white;
+    border: 1px solid var(--rosa-pastel);
+    border-radius: 12px;
+}
+
+footer {
+    background-color: var(--marron-oscuro);
+    color: var(--fondo-claro);
+}

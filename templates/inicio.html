@@ -1,13 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
-    <div class="container-fluid py-5 text-center">
-        <h1 class="display-5 fw-bold text-primary">Bienvenidos a Mi Negocio</h1>
-        <p class="col-md-8 mx-auto fs-4 text-muted">Ofrecemos las mejores soluciones de ingeniería, diseño y servicios profesionales adaptados a tus necesidades.</p>
-        <hr class="my-4">
-        <p>¿Querés saber más o pedir un presupuesto?</p>
-        <a class="btn btn-primary btn-lg" href="/contacto" role="button">Contáctanos hoy</a>
+<div class="p-5 mb-5 bg-white rounded-3 shadow-sm border text-center card-bonita">
+    <h1 class="display-5 fw-bold" style="color: var(--marron-oscuro);">Bienvenidos a Todo Bonito</h1>
+    <p class="col-md-8 mx-auto fs-5 text-muted">Tu polirrubro de confianza. Todo lo que buscás para regalar, decorar o darte un gusto, en un solo lugar y con la mejor onda.</p>
+    <a class="btn btn-bonito btn-lg px-4 mt-2" href="https://instagram.com/todo.bonito.polirrubro" target="_blank">
+        <i class="bi bi-instagram"></i> Seguinos en Instagram
+    </a>
+</div>
+
+<!-- Secciones del Polirrubro -->
+<h3 class="text-center mb-4 fw-bold">¿Qué vas a encontrar acá?</h3>
+<div class="row g-4 text-center">
+    <div class="col-md-4">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 text-warning mb-2">🎁</div>
+            <h5>Regalería & Deco</h5>
+            <p class="text-muted small">Detalles hermosos para regalar o para ponerle onda a tus espacios.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 text-danger mb-2">🌸</div>
+            <h5>Accesorios & Más</h5>
+            <p class="text-muted small">Esas cositas lindas de uso diario que te alegran el día.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 text-info mb-2">✏️</div>
+            <h5>Kiosco & Librería</h5>
+            <p class="text-muted small">Lo esencial para el cole, la facu o el antojo de la tarde.</p>
+        </div>
     </div>
 </div>
 {% endblock %}
