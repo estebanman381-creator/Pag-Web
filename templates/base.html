@@ -13,38 +13,27 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Menú de Navegación Pastel -->
+    <!-- SECCIÓN SUPERIOR: Logo Centrado -->
+    <div class="logo-container text-center py-4">
+        <a href="/">
+            <!-- Si tenés el logo en imagen, usás esta línea (ej: logo.png en static/img/) -->
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Todo Bonito" class="logo-img">
+            <h1 class="display-4 my-0 fw-bold" style="color: var(--marron-oscuro); font-style: italic;">Todo Bonito</h1>
+            <p class="text-uppercase small tracking-widest text-muted mb-0" style="font-family: var(--fuente-cuerpo); letter-spacing: 3px;">🌸 Polirrubro & Deco 🌸</p>
+        </a>
+    </div>
+
+    <!-- Menú de Navegación Sofisticado -->
     <nav class="navbar navbar-expand-lg navbar-custom shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fs-4" href="/">✨ Todo Bonito</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/">Inicio</a>
-                    
-                    <!-- Menú Desplegable de Rubros -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rubros
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#libreria">✏️ Librería</a></li>
-                            <li><a class="dropdown-item" href="#bazar">🍽️ Bazar</a></li>
-                            <li><a class="dropdown-item" href="#jugueteria">🧸 Juguetería</a></li>
-                            <li><a class="dropdown-item" href="#botellas">🥤 Botellas Térmicas</a></li>
-                            <li><a class="dropdown-item" href="#mate">🧉 Mundo Mate</a></li>
-                            <li><a class="dropdown-item" href="#maquillaje">💄 Maquillaje y más</a></li>
-                            <li><a class="dropdown-item" href="#bijuteria">💍 Bijutería</a></li>
-                            <li><a class="dropdown-item" href="#regaleria">🎁 Regalería</a></li>
-                            <li><a class="dropdown-item" href="#cotillon">🎉 Cotillón</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#otros">✨ Otros Artículos</a></li>
-                        </ul>
-                    </div>
-
-                    <a class="nav-link" href="/contacto">Contacto</a>
+                <div class="navbar-nav mx-auto text-center">
+                    <a class="nav-link px-3" href="/">Inicio</a>
+                    <a class="nav-link px-3" href="#rubros">Rubros</a>
+                    <a class="nav-link px-3" href="/contacto">Contacto</a>
                 </div>
             </div>
         </div>
@@ -57,8 +46,8 @@
     </div>
 
     <!-- Pie de página -->
-    <footer class="text-center py-3 mt-auto">
-        <p class="mb-0">&copy; 2026 Todo Bonito. Hecho con amor 🌸</p>
+    <footer class="text-center py-4 mt-auto">
+        <p class="mb-0 text-uppercase fw-light">&copy; 2026 Todo Bonito. Hecho con amor 🌸</p>
     </footer>
 
     <!-- Bootstrap JS -->

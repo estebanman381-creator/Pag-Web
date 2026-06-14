@@ -1,55 +1,118 @@
-/* Paleta de colores Todo Bonito */
+/* Importar tipografías sofisticadas desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
+
 :root {
     --rosa-pastel: #F7D6D0;
     --rosa-oscuro: #E2B4AC;
     --marron-suave: #9C8470;
     --marron-oscuro: #5C4B40;
     --fondo-claro: #FAF6F0;
+    --fuente-titulos: 'Playfair Display', serif;
+    --fuente-cuerpo: 'Montserrat', sans-serif;
 }
 
 body {
     background-color: var(--fondo-claro);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--fuente-cuerpo);
     color: var(--marron-oscuro);
 }
 
-/* Ajustes del menú */
-.navbar-custom {
-    background-color: var(--rosa-pastel) !important;
-    border-bottom: 2px solid var(--rosa-oscuro);
+/* Títulos elegantes */
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: var(--fuente-titulos);
+    letter-spacing: 0.5px;
 }
 
-.navbar-custom .navbar-brand, 
+/* Área del Logo */
+.logo-container {
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.logo-img {
+    max-height: 140px; /* Ajustá el tamaño de tu logo desde acá */
+    object-fit: contain;
+}
+
+/* Menú de navegación */
+.navbar-custom {
+    background-color: white !important;
+    border-bottom: 1px solid var(--rosa-pastel);
+}
 .navbar-custom .nav-link {
+    font-family: var(--fuente-cuerpo);
     color: var(--marron-oscuro) !important;
     font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-
 .navbar-custom .nav-link:hover {
-    color: var(--marron-suave) !important;
+    color: var(--rosa-oscuro) !important;
 }
 
-/* Botones personalizados */
+/* Botones con estilo */
 .btn-bonito {
+    font-family: var(--fuente-cuerpo);
     background-color: var(--marron-suave);
     color: white;
     border: none;
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
 }
-
 .btn-bonito:hover {
     background-color: var(--marron-oscuro);
     color: white;
 }
 
-/* Tarjetas y secciones */
-.card-bonita {
-    background-color: white;
-    border: 1px solid var(--rosa-pastel);
-    border-radius: 12px;
+/* Tarjetas de Rubros con imagen de fondo */
+.card-rubro {
+    position: relative;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.card-rubro:hover {
+    transform: translateY(-5px);
+}
+.rubro-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+.card-rubro:hover .rubro-bg {
+    transform: scale(1.1);
+}
+/* Capa oscura/pastel para que el texto resalte sobre la foto */
+.rubro-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: roles-gradient;
+    background: linear-gradient(to bottom, rgba(92, 75, 64, 0.3), rgba(92, 75, 64, 0.75));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rubro-titulo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    margin: 0;
 }
 
 footer {
     background-color: var(--marron-oscuro);
     color: var(--fondo-claro);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }

@@ -1,108 +1,114 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- Banner de Bienvenida -->
-<div class="p-5 mb-5 bg-white rounded-3 shadow-sm border text-center card-bonita">
-    <h1 class="display-5 fw-bold" style="color: var(--marron-oscuro);">Bienvenidos a Todo Bonito</h1>
-    <p class="col-md-8 mx-auto fs-5 text-muted">Tu polirrubro de confianza. Todo lo que buscás para regalar, decorar o darte un gusto, en un solo lugar y con la mejor onda.</p>
-    <a class="btn btn-bonito btn-lg px-4 mt-2" href="https://instagram.com/TU_USUARIO_REAL" target="_blank">
-        <i class="bi bi-instagram"></i> ¡Seguinos en Instagram!
+<!-- Frase de bienvenida sutil -->
+<div class="text-center my-5 py-3">
+    <p class="fs-5 text-muted mx-auto" style="max-width: 700px; font-family: var(--fuente-titulos); font-style: italic;">
+        "Todo lo que buscás para regalar, decorar o darte un gusto, en un solo lugar y seleccionado con el amor que tu hogar se merece."
+    </p>
+    <a class="btn btn-bonito px-4 py-2 mt-3 shadow-sm" href="https://instagram.com/TU_USUARIO_REAL" target="_blank">
+        <i class="bi bi-instagram"></i> Visitar nuestro Instagram
     </a>
 </div>
 
-<!-- Título de Secciones -->
-<h2 class="text-center mb-5 fw-bold" style="color: var(--marron-oscuro);">Nuestros Rubros</h2>
+<!-- Título de Categorías -->
+<div class="text-center mb-5" id="rubros">
+    <h2 class="fw-bold" style="color: var(--marron-oscuro);">Explorá Nuestras Colecciones</h2>
+    <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 15px auto;"></div>
+</div>
 
-<!-- Grilla de Rubros -->
+<!-- Grilla de Rubros Modernos -->
 <div class="row g-4 text-center">
     
     <!-- Librería -->
-    <div class="col-6 col-md-4" id="libreria">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">✏️</div>
-            <h5 class="fw-bold">Librería</h5>
-            <p class="text-muted small mb-0">Útiles escolares, carpetas, lápices y todo para el cole o la facu.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Librería</h4>
+            </div>
         </div>
     </div>
 
     <!-- Bazar -->
-    <div class="col-6 col-md-4" id="bazar">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🍽️</div>
-            <h5 class="fw-bold">Bazar</h5>
-            <p class="text-muted small mb-0">Cositas lindas y prácticas para equipar y decorar tu cocina.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Bazar</h4>
+            </div>
         </div>
     </div>
 
     <!-- Juguetería -->
-    <div class="col-6 col-md-4" id="jugueteria">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🧸</div>
-            <h5 class="fw-bold">Juguetería</h5>
-            <p class="text-muted small mb-0">Juegos y juguetes hermosos para alegrar a los más chicos.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1537655780520-1e392edd816a?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Juguetería</h4>
+            </div>
         </div>
     </div>
 
     <!-- Botellas Térmicas -->
-    <div class="col-6 col-md-4" id="botellas">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🥤</div>
-            <h5 class="fw-bold">Botellas Térmicas</h5>
-            <p class="text-muted small mb-0">Mantener tus bebidas frías o calientes con toda la onda.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Botellas Térmicas</h4>
+            </div>
         </div>
     </div>
 
     <!-- Mundo Mate -->
-    <div class="col-6 col-md-4" id="mate">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🧉</div>
-            <h5 class="fw-bold">Mundo Mate</h5>
-            <p class="text-muted small mb-0">Mates, bombillas, termos y yerberas súper estéticas.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1583250917220-4e14f8286a01?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Mundo Mate</h4>
+            </div>
         </div>
     </div>
 
     <!-- Maquillaje -->
-    <div class="col-6 col-md-4" id="maquillaje">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">💄</div>
-            <h5 class="fw-bold">Maquillaje y más</h5>
-            <p class="text-muted small mb-0">Cosméticos, espejos, brochas y cositas de *skincare*.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Maquillaje y más</h4>
+            </div>
         </div>
     </div>
 
     <!-- Bijutería -->
-    <div class="col-6 col-md-4" id="bijuteria">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">💍</div>
-            <h5 class="fw-bold">Bijutería</h5>
-            <p class="text-muted small mb-0">Aros, collares, pulseras y accesorios para lucirte.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Bijutería</h4>
+            </div>
         </div>
     </div>
 
     <!-- Regalería -->
-    <div class="col-6 col-md-4" id="regaleria">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🎁</div>
-            <h5 class="fw-bold">Regalería</h5>
-            <p class="text-muted small mb-0">Detalles únicos ideales para sorprender a alguien especial.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Regalería</h4>
+            </div>
         </div>
     </div>
 
     <!-- Cotillón -->
-    <div class="col-6 col-md-4" id="cotillon">
-        <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 mb-2">🎉</div>
-            <h5 class="fw-bold">Cotillón</h5>
-            <p class="text-muted small mb-0">Todo lo necesario para ponerle color y alegría a tus festejos.</p>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card-rubro">
+            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=500');"></div>
+            <div class="rubro-overlay">
+                <h4 class="rubro-titulo">Cotillón</h4>
+            </div>
         </div>
     </div>
 
-</div>
-
-<!-- Sección Otros Artículos -->
-<div class="mt-5 p-4 bg-white rounded-3 border text-center card-bonita" id="otros">
-    <span class="fs-2">✨</span>
-    <h4 class="fw-bold mt-2">¿Buscás algo más?</h4>
-    <p class="text-muted mb-0">En nuestro local físico tenemos gran variedad de otros artículos que renovamos semana a semana. ¡Consultanos!</p>
 </div>
 {% endblock %}
