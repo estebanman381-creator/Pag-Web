@@ -1,37 +1,108 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Banner de Bienvenida -->
 <div class="p-5 mb-5 bg-white rounded-3 shadow-sm border text-center card-bonita">
     <h1 class="display-5 fw-bold" style="color: var(--marron-oscuro);">Bienvenidos a Todo Bonito</h1>
     <p class="col-md-8 mx-auto fs-5 text-muted">Tu polirrubro de confianza. Todo lo que buscás para regalar, decorar o darte un gusto, en un solo lugar y con la mejor onda.</p>
-    <a class="btn btn-bonito btn-lg px-4 mt-2" href="https://instagram.com/todo.bonito.polirrubro" target="_blank">
-        <i class="bi bi-instagram"></i> Seguinos en Instagram
+    <a class="btn btn-bonito btn-lg px-4 mt-2" href="https://instagram.com/TU_USUARIO_REAL" target="_blank">
+        <i class="bi bi-instagram"></i> ¡Seguinos en Instagram!
     </a>
 </div>
 
-<!-- Secciones del Polirrubro -->
-<h3 class="text-center mb-4 fw-bold">¿Qué vas a encontrar acá?</h3>
+<!-- Título de Secciones -->
+<h2 class="text-center mb-5 fw-bold" style="color: var(--marron-oscuro);">Nuestros Rubros</h2>
+
+<!-- Grilla de Rubros -->
 <div class="row g-4 text-center">
-    <div class="col-md-4">
+    
+    <!-- Librería -->
+    <div class="col-6 col-md-4" id="libreria">
         <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 text-warning mb-2">🎁</div>
-            <h5>Regalería & Deco</h5>
-            <p class="text-muted small">Detalles hermosos para regalar o para ponerle onda a tus espacios.</p>
+            <div class="fs-1 mb-2">✏️</div>
+            <h5 class="fw-bold">Librería</h5>
+            <p class="text-muted small mb-0">Útiles escolares, carpetas, lápices y todo para el cole o la facu.</p>
         </div>
     </div>
-    <div class="col-md-4">
+
+    <!-- Bazar -->
+    <div class="col-6 col-md-4" id="bazar">
         <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 text-danger mb-2">🌸</div>
-            <h5>Accesorios & Más</h5>
-            <p class="text-muted small">Esas cositas lindas de uso diario que te alegran el día.</p>
+            <div class="fs-1 mb-2">🍽️</div>
+            <h5 class="fw-bold">Bazar</h5>
+            <p class="text-muted small mb-0">Cositas lindas y prácticas para equipar y decorar tu cocina.</p>
         </div>
     </div>
-    <div class="col-md-4">
+
+    <!-- Juguetería -->
+    <div class="col-6 col-md-4" id="jugueteria">
         <div class="p-4 card-bonita shadow-sm bg-white h-100">
-            <div class="fs-1 text-info mb-2">✏️</div>
-            <h5>Kiosco & Librería</h5>
-            <p class="text-muted small">Lo esencial para el cole, la facu o el antojo de la tarde.</p>
+            <div class="fs-1 mb-2">🧸</div>
+            <h5 class="fw-bold">Juguetería</h5>
+            <p class="text-muted small mb-0">Juegos y juguetes hermosos para alegrar a los más chicos.</p>
         </div>
     </div>
+
+    <!-- Botellas Térmicas -->
+    <div class="col-6 col-md-4" id="botellas">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">🥤</div>
+            <h5 class="fw-bold">Botellas Térmicas</h5>
+            <p class="text-muted small mb-0">Mantener tus bebidas frías o calientes con toda la onda.</p>
+        </div>
+    </div>
+
+    <!-- Mundo Mate -->
+    <div class="col-6 col-md-4" id="mate">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">🧉</div>
+            <h5 class="fw-bold">Mundo Mate</h5>
+            <p class="text-muted small mb-0">Mates, bombillas, termos y yerberas súper estéticas.</p>
+        </div>
+    </div>
+
+    <!-- Maquillaje -->
+    <div class="col-6 col-md-4" id="maquillaje">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">💄</div>
+            <h5 class="fw-bold">Maquillaje y más</h5>
+            <p class="text-muted small mb-0">Cosméticos, espejos, brochas y cositas de *skincare*.</p>
+        </div>
+    </div>
+
+    <!-- Bijutería -->
+    <div class="col-6 col-md-4" id="bijuteria">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">💍</div>
+            <h5 class="fw-bold">Bijutería</h5>
+            <p class="text-muted small mb-0">Aros, collares, pulseras y accesorios para lucirte.</p>
+        </div>
+    </div>
+
+    <!-- Regalería -->
+    <div class="col-6 col-md-4" id="regaleria">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">🎁</div>
+            <h5 class="fw-bold">Regalería</h5>
+            <p class="text-muted small mb-0">Detalles únicos ideales para sorprender a alguien especial.</p>
+        </div>
+    </div>
+
+    <!-- Cotillón -->
+    <div class="col-6 col-md-4" id="cotillon">
+        <div class="p-4 card-bonita shadow-sm bg-white h-100">
+            <div class="fs-1 mb-2">🎉</div>
+            <h5 class="fw-bold">Cotillón</h5>
+            <p class="text-muted small mb-0">Todo lo necesario para ponerle color y alegría a tus festejos.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Sección Otros Artículos -->
+<div class="mt-5 p-4 bg-white rounded-3 border text-center card-bonita" id="otros">
+    <span class="fs-2">✨</span>
+    <h4 class="fw-bold mt-2">¿Buscás algo más?</h4>
+    <p class="text-muted mb-0">En nuestro local físico tenemos gran variedad de otros artículos que renovamos semana a semana. ¡Consultanos!</p>
 </div>
 {% endblock %}

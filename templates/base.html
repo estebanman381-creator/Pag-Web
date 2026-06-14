@@ -6,7 +6,7 @@
     <title>Todo Bonito | Polirrubro</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Iconos de Bootstrap para que quede más lindo -->
+    <!-- Iconos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <!-- Tus estilos personalizados -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
@@ -14,12 +14,38 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Menú de Navegación Pastel -->
-    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand fs-4" href="/">✨ Todo Bonito</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/">Inicio</a>
-                <a class="nav-link" href="/contacto">Contacto</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/">Inicio</a>
+                    
+                    <!-- Menú Desplegable de Rubros -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Rubros
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#libreria">✏️ Librería</a></li>
+                            <li><a class="dropdown-item" href="#bazar">🍽️ Bazar</a></li>
+                            <li><a class="dropdown-item" href="#jugueteria">🧸 Juguetería</a></li>
+                            <li><a class="dropdown-item" href="#botellas">🥤 Botellas Térmicas</a></li>
+                            <li><a class="dropdown-item" href="#mate">🧉 Mundo Mate</a></li>
+                            <li><a class="dropdown-item" href="#maquillaje">💄 Maquillaje y más</a></li>
+                            <li><a class="dropdown-item" href="#bijuteria">💍 Bijutería</a></li>
+                            <li><a class="dropdown-item" href="#regaleria">🎁 Regalería</a></li>
+                            <li><a class="dropdown-item" href="#cotillon">🎉 Cotillón</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#otros">✨ Otros Artículos</a></li>
+                        </ul>
+                    </div>
+
+                    <a class="nav-link" href="/contacto">Contacto</a>
+                </div>
             </div>
         </div>
     </nav>
