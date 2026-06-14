@@ -23,14 +23,19 @@ h1, h2, h3, h4, h5, .navbar-brand {
     letter-spacing: 0.5px;
 }
 
-/* Área del Logo */
+/* Área del Logo en franja completa */
 .logo-container {
     background-color: white;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0 !important; /* Quitamos espacios libres verticales para que ocupe todo */
+    overflow: hidden;
 }
 .logo-img {
-    max-height: 140px; /* Ajustá el tamaño de tu logo desde acá */
-    object-fit: contain;
+    width: 100%;          /* Obliga al logo a ocupar todo el ancho de la pantalla */
+    height: auto;         /* Mantiene la proporción perfecta para que no se deforme */
+    max-height: 280px;    /* Altura máxima ideal para que no tape media pantalla en computadoras */
+    object-fit: cover;    /* Si la pantalla es gigante, recorta los bordes estéticamente */
+    display: block;
 }
 
 /* Menú de navegación */
