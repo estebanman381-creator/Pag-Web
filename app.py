@@ -32,20 +32,36 @@ class Producto(db.Model):
 with app.app_context():
     db.create_all()
 
-# --- RUTA DE LA PÁGINA PRINCIPAL ---
-@app.route('/')
-def inicio():
-    # Buscamos todos los productos guardados para pasárselos a la web
-    productos = Producto.query.all()
-    return render_template('inicio.html', productos=productos)
+from flask import session  # Asegurate de que 'session' esté importado arriba junto a redirect, url_for, etc.
 
-@app.route('/contacto')
-def contacto():
-    return render_template('contacto.html')
+# CLAVE DE ACCESO (Cambiá 'admin123' por la contraseña secreta que vos quieras)
+CONTRASENA_ADMIN = "todobonito2024"
 
-# --- PANEL DE ADMINISTRACIÓN SECRETO ---
+# --- RUTA DE LOGIN (PANTALLA DE ACCESO) ---
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        clave_ingresada = request.form.get('password')
+        if clave_ingresada == CONTRASENA_ADMIN:
+            session['admin_logueado'] = True  # Guardamos en la memoria del navegador que ya entró
+            return redirect(url_for('admin'))
+        else:
+            flash('Contraseña incorrecta. Intentalo de nuevo.', 'danger')
+    return render_template('login.html')
+
+# --- RUTA DE LOGOUT (PARA CERRAR SESIÓN) ---
+@app.route('/logout')
+def logout():
+    session.pop('admin_logueado', None)  # Borra la sesión
+    return redirect(url_for('inicio'))
+
+# --- PANEL DE ADMINISTRACIÓN PROTEGIDO ---
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
+    # 🛑 CONTROL DE SEGURIDAD: Si no está logueado, lo mandamos a ponerse la clave
+    if not session.get('admin_logueado'):
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         precio = request.form.get('precio')
@@ -53,9 +69,8 @@ def admin():
         categoria = request.form.get('categoria')
         foto = request.files.get('foto')
 
-        imagen_url = "https://via.placeholder.com/300"  # Imagen gris por defecto
+        imagen_url = "https://via.placeholder.com/300"
 
-        # Subida real a Cloudinary
         if foto and foto.filename != '':
             try:
                 upload_result = cloudinary.uploader.upload(foto)
@@ -63,7 +78,6 @@ def admin():
             except Exception as e:
                 print(f"Error al subir imagen: {e}")
 
-        # Guardamos todo en el archivo SQLite
         nuevo_producto = Producto(
             titulo=titulo, 
             precio=float(precio), 
@@ -76,7 +90,6 @@ def admin():
         
         return redirect(url_for('admin'))
 
-    # Si entramos normal por el navegador, nos muestra la lista de lo cargado
     productos = Producto.query.all()
     return render_template('admin.html', productos=productos)
 

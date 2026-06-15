@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center my-5">
+    <div class="col-12 col-sm-8 col-md-4">
+        <div class="p-4 bg-white rounded-3 border shadow-sm text-center" style="border-radius: 15px !important;">
+            <h3 class="fw-bold mb-2" style="color: var(--marron-oscuro);">🔒 Acceso Privado</h3>
+            <p class="text-muted small mb-4">Ingresá la contraseña para administrar Todo Bonito</p>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} id-alerta small py-2">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/login" method="POST">
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control text-center" placeholder="Contraseña" required autofocus>
+                </div>
+                <button type="submit" class="btn btn-bonito w-100 py-2">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
