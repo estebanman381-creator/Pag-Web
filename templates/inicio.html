@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Frase de bienvenida centrada y compacta -->
 <div class="container text-center my-3 py-1">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
@@ -14,6 +15,7 @@
     </div>
 </div>
 
+<!-- Título de Categorías -->
 <div class="text-center mb-5" id="rubros">
     <h2 class="fw-bold" style="color: var(--marron-oscuro);">Explorá Nuestras Colecciones</h2>
     <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 15px auto;"></div>
@@ -21,6 +23,7 @@
 
 <div class="row g-4 text-center">
 
+    <!-- ⚡ SECCIÓN DINÁMICA: Si agregás productos desde /admin, aparecerán ACÁ -->
     {% if productos %}
         {% for p in productos %}
         <div class="col-12 col-sm-6 col-md-4">
@@ -44,86 +47,95 @@
             </div>
         </div>
         {% endfor %}
-        
         <div class="col-12 my-5"><hr style="border-color: var(--rosa-oscuro); opacity: 0.2;"></div>
     {% endif %}
 
 
+    <!-- 🌸 TU GRILLA CLÁSICA REPARADA (Rutas corregidas a .png de tu carpeta css/img) -->
+    <!-- Librería -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/libreria.jpg') }}" class="card-img" alt="Librería">
+            <img src="{{ url_for('static', filename='css/img/libreria.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Librería</h5>
             </div>
         </div>
     </div>
 
+    <!-- Bazar -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/bazar.jpg') }}" class="card-img" alt="Bazar">
+            <img src="{{ url_for('static', filename='css/img/bazar.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Bazar</h5>
             </div>
         </div>
     </div>
 
+    <!-- Juguetería -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/jugueteria.jpg') }}" class="card-img" alt="Juguetería">
+            <img src="{{ url_for('static', filename='css/img/jugueteria.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Juguetería</h5>
             </div>
         </div>
     </div>
 
+    <!-- Botellas Térmicas -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/botellas.jpg') }}" class="card-img" alt="Botellas Térmicas">
+            <img src="{{ url_for('static', filename='css/img/botellas.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Botellas Térmicas</h5>
             </div>
         </div>
     </div>
 
+    <!-- Mundo Mate -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/mate.jpg') }}" class="card-img" alt="Mundo Mate">
+            <img src="{{ url_for('static', filename='css/img/mate.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Mundo Mate</h5>
             </div>
         </div>
     </div>
 
+    <!-- Maquillaje y más -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/maquillaje.jpg') }}" class="card-img" alt="Maquillaje y más">
+            <img src="{{ url_for('static', filename='css/img/maquillaje.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Maquillaje y más</h5>
             </div>
         </div>
     </div>
 
+    <!-- Bijutería -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/bijuteria.jpg') }}" class="card-img" alt="Bijutería">
+            <img src="{{ url_for('static', filename='css/img/bijuteria.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Bijutería</h5>
             </div>
         </div>
     </div>
 
+    <!-- Regalería -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/regaleria.jpg') }}" class="card-img" alt="Regalería">
+            <img src="{{ url_for('static', filename='css/img/regaleria.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Regalería</h5>
             </div>
         </div>
     </div>
 
+    <!-- Cotillón -->
     <div class="col-12 col-md-4">
         <div class="card bg-dark text-white border-0 shadow-sm custom-card">
-            <img src="{{ url_for('static', filename='css/img/cotillon.jpg') }}" class="card-img" alt="Cotillón">
+            <img src="{{ url_for('static', filename='css/img/cotillon.png') }}" class="card-img" alt="">
             <div class="card-img-overlay d-flex align-items-center justify-content-center">
                 <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Cotillón</h5>
             </div>
