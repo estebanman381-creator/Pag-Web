@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <p class="fs-5 text-muted mb-3" style="font-family: var(--fuente-titulos); font-style: italic; line-height: 1.6;">
-                "Todo lo que buscas para regalar, decorar o darte un gusto, en un solo lugar y seleccionado con el amor que vos y tu hogar se merece."
+                "Todo lo que buscás para regalar, decorar o darte un gusto, en un solo lugar y seleccionado con el amor que vos y tu hogar se merece."
             </p>
             <a class="btn btn-bonito px-4 py-2 shadow-sm d-inline-flex align-items-center" href="https://instagram.com/TU_USUARIO_REAL" target="_blank">
                 <i class="bi bi-instagram me-2"></i> Visita nuestro Instagram
@@ -17,112 +17,46 @@
 
 <!-- Título de Categorías -->
 <div class="text-center mb-5" id="rubros">
-    <h2 class="fw-bold" style="color: var(--marron-oscuro);">Explorá Nuestras Colecciones</h2>
+    <h2 class="fw-bold" style="color: var(--marron-oscuro);">Nuestros Productos</h2>
     <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 15px auto;"></div>
 </div>
 
-<!-- Grilla de Rubros Modernos -->
+<!-- Grilla de Productos Dinámica -->
 <div class="row g-4 text-center">
     
-    <!-- Librería -->
+    {% for p in productos %}
+    <!-- Tarjeta de Producto Individual -->
     <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Librería</h4>
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; background-color: #fff;">
+            <!-- Contenedor de la Imagen -->
+            <div style="position: relative; height: 250px; width: 100%; overflow: hidden;">
+                <img src="{{ p.imagen_url }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ p.titulo }}">
+                <span class="badge bg-light text-dark border position-absolute top-0 start-0 m-3" style="border-radius: 20px; font-size: 0.8rem; background-color: rgba(255,255,255,0.9) !important;">
+                    {{ p.categoria|upper }}
+                </span>
+            </div>
+            
+            <!-- Cuerpo de la Tarjeta -->
+            <div class="card-body d-flex flex-column p-4 text-start">
+                <h5 class="card-title fw-bold mb-1" style="color: var(--marron-oscuro); font-family: var(--fuente-cuerpo);">{{ p.titulo }}</h5>
+                <p class="card-text text-muted small flex-grow-1 mb-3">{{ p.descripcion or 'Sin descripción disponible.' }}</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fs-5 fw-bold" style="color: var(--marron-suave); font-family: var(--fuente-cuerpo);">${{ p.precio }}</span>
+                    <a href="https://wa.me/5491123456789?text=Hola!%20Me%20interesa%20el%20producto:%20{{ p.titulo }}" target="_blank" class="btn btn-sm btn-bonito px-3">
+                        <i class="bi bi-whatsapp"></i> Consultar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Bazar -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Bazar</h4>
-            </div>
-        </div>
+    {% else %}
+    <!-- Mensaje si todavía no cargaste nada -->
+    <div class="col-12 py-5 text-center text-muted">
+        <i class="bi bi-boxes display-4 mb-3 d-block" style="color: var(--rosa-oscuro);"></i>
+        <p class="fs-5 mb-1">¡Estamos preparando el catálogo digital!</p>
+        <p class="small text-muted">Pronto vas a poder ver todos nuestros rubros y artículos acá.</p>
     </div>
-
-    <!-- Juguetería (IMAGEN CORREGIDA) -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Juguetería</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Botellas Térmicas -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Botellas Térmicas</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mundo Mate (IMAGEN CORREGIDA) -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Mundo Mate</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Maquillaje -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Maquillaje y más</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bijutería -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Bijutería</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Regalería -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Regalería</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cotillón -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Cotillón</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Otros Artículos (AGREGADO COMO TARJETA CON IMAGEN) -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card-rubro">
-            <div class="rubro-bg" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=500');"></div>
-            <div class="rubro-overlay">
-                <h4 class="rubro-titulo">Otros Artículos</h4>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 
 </div>
 {% endblock %}
