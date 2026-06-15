@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- Frase de bienvenida centrada y compacta -->
 <div class="container text-center my-3 py-1">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
@@ -15,48 +14,121 @@
     </div>
 </div>
 
-<!-- Título de Categorías -->
 <div class="text-center mb-5" id="rubros">
-    <h2 class="fw-bold" style="color: var(--marron-oscuro);">Nuestros Productos</h2>
+    <h2 class="fw-bold" style="color: var(--marron-oscuro);">Explorá Nuestras Colecciones</h2>
     <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 15px auto;"></div>
 </div>
 
-<!-- Grilla de Productos Dinámica -->
 <div class="row g-4 text-center">
-    
-    {% for p in productos %}
-    <!-- Tarjeta de Producto Individual -->
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; background-color: #fff;">
-            <!-- Contenedor de la Imagen -->
-            <div style="position: relative; height: 250px; width: 100%; overflow: hidden;">
-                <img src="{{ p.imagen_url }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ p.titulo }}">
-                <span class="badge bg-light text-dark border position-absolute top-0 start-0 m-3" style="border-radius: 20px; font-size: 0.8rem; background-color: rgba(255,255,255,0.9) !important;">
-                    {{ p.categoria|upper }}
-                </span>
-            </div>
-            
-            <!-- Cuerpo de la Tarjeta -->
-            <div class="card-body d-flex flex-column p-4 text-start">
-                <h5 class="card-title fw-bold mb-1" style="color: var(--marron-oscuro); font-family: var(--fuente-cuerpo);">{{ p.titulo }}</h5>
-                <p class="card-text text-muted small flex-grow-1 mb-3">{{ p.descripcion or 'Sin descripción disponible.' }}</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto">
-                    <span class="fs-5 fw-bold" style="color: var(--marron-suave); font-family: var(--fuente-cuerpo);">${{ p.precio }}</span>
-                    <a href="https://wa.me/5491123456789?text=Hola!%20Me%20interesa%20el%20producto:%20{{ p.titulo }}" target="_blank" class="btn btn-sm btn-bonito px-3">
-                        <i class="bi bi-whatsapp"></i> Consultar
-                    </a>
+
+    {% if productos %}
+        {% for p in productos %}
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; background-color: #fff;">
+                <div style="position: relative; height: 250px; width: 100%; overflow: hidden;">
+                    <img src="{{ p.imagen_url }}" class="w-100 h-100" style="object-fit: cover;" alt="{{ p.titulo }}">
+                    <span class="badge bg-light text-dark border position-absolute top-0 start-0 m-3" style="border-radius: 20px; font-size: 0.8rem; background-color: rgba(255,255,255,0.9) !important;">
+                        {{ p.categoria|upper }}
+                    </span>
+                </div>
+                <div class="card-body d-flex flex-column p-4 text-start">
+                    <h5 class="card-title fw-bold mb-1" style="color: var(--marron-oscuro); font-family: var(--fuente-cuerpo);">{{ p.titulo }}</h5>
+                    <p class="card-text text-muted small flex-grow-1 mb-3">{{ p.descripcion or 'Producto exclusivo de nuestra tienda.' }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <span class="fs-5 fw-bold" style="color: var(--marron-suave); font-family: var(--fuente-cuerpo);">${{ p.precio }}</span>
+                        <a href="https://wa.me/5491123456789?text=Hola!%20Me%20interesa:%20{{ p.titulo }}" target="_blank" class="btn btn-sm btn-bonito px-3">
+                            <i class="bi bi-whatsapp"></i> Consultar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
+        
+        <div class="col-12 my-5"><hr style="border-color: var(--rosa-oscuro); opacity: 0.2;"></div>
+    {% endif %}
+
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/libreria.jpg') }}" class="card-img" alt="Librería">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Librería</h5>
+            </div>
+        </div>
     </div>
-    {% else %}
-    <!-- Mensaje si todavía no cargaste nada -->
-    <div class="col-12 py-5 text-center text-muted">
-        <i class="bi bi-boxes display-4 mb-3 d-block" style="color: var(--rosa-oscuro);"></i>
-        <p class="fs-5 mb-1">¡Estamos preparando el catálogo digital!</p>
-        <p class="small text-muted">Pronto vas a poder ver todos nuestros rubros y artículos acá.</p>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/bazar.jpg') }}" class="card-img" alt="Bazar">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Bazar</h5>
+            </div>
+        </div>
     </div>
-    {% endfor %}
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/jugueteria.jpg') }}" class="card-img" alt="Juguetería">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Juguetería</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/botellas.jpg') }}" class="card-img" alt="Botellas Térmicas">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Botellas Térmicas</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/mate.jpg') }}" class="card-img" alt="Mundo Mate">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Mundo Mate</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/maquillaje.jpg') }}" class="card-img" alt="Maquillaje y más">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Maquillaje y más</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/bijuteria.jpg') }}" class="card-img" alt="Bijutería">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Bijutería</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/regaleria.jpg') }}" class="card-img" alt="Regalería">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Regalería</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark text-white border-0 shadow-sm custom-card">
+            <img src="{{ url_for('static', filename='css/img/cotillon.jpg') }}" class="card-img" alt="Cotillón">
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                <h5 class="card-title text-uppercase fw-bold m-0 custom-card-title">Cotillón</h5>
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}
