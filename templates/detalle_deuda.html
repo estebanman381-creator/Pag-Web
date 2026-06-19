@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold m-0" style="color: var(--marron-oscuro);">Ficha de: {{ cliente.nombre }}</h2>
+            <small class="text-muted">Teléfono: {{ cliente.telefono or 'No registrado' }}</small>
+        </div>
+        <a href="{{ url_for('admin_deudas') }}" class="btn btn-outline-secondary btn-sm" style="border-radius: 20px;">Volver a Cuentas</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm p-4 mb-3" style="border-radius: 15px; background-color: #fffaf8;">
+                <h4 class="fw-bold text-center {% if cliente.saldo > 0 %}text-danger{% else %}text-success{% endif %} mb-1">
+                    ${{ cliente.saldo | int }}
+                </h4>
+                <p class="text-muted text-center small mb-4">Saldo Actual</p>
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">Tipo de Operación</label>
+                        <select name="tipo" class="form-select" style="border-radius: 8px;">
+                            <option value="deuda">⚠️ Anotar Nueva Deuda (+)</option>
+                            <option value="pago">✅ Registrar Pago Parcial (-)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">Monto ($)</label>
+                        <input type="number" name="monto" class="form-control" step="any" required style="border-radius: 8px;">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">Detalle / Concepto (Opcional)</label>
+                        <input type="text" name="descripcion" class="form-control" placeholder="Ej: Se llevó un termo / Entregó seña" style="border-radius: 8px;">
+                    </div>
+                    <button type="submit" class="btn btn-bonito w-100" style="border-radius: 8px;">Guardar Movimiento</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-8">
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 15px;">
+                <h5 class="fw-bold mb-3" style="color: var(--marron-oscuro);">Historial de Movimientos</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr class="text-muted">
+                                <th>Fecha / Hora</th>
+                                <th>Detalle</th>
+                                <th class="text-end">Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mov in cliente.movimientos | reverse %}
+                            <tr>
+                                <td class="text-muted small">{{ mov.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
+                                <td class="fw-semibold" style="color: var(--marron-oscuro);">{{ mov.descripcion }}</td>
+                                <td class="text-end fw-bold {% if mov.monto > 0 %}text-danger{% else %}text-success{% endif %}">
+                                    {% if mov.monto > 0 %}+{% endif %}${{ mov.monto | int }}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-4">No hay movimientos registrados en esta cuenta todavía.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

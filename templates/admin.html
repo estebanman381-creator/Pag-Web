@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3 mt-2">
-    <span class="text-muted small">Sesión administrativa activa</span>
-    <a href="/logout" class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">🚪 Cerrar Sesión</a>
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-3 mt-2 gap-2 border-bottom pb-3">
+    <div>
+        <span class="badge bg-success mb-1">● Panel Activo</span>
+        <div class="text-muted small">Administración General de Todo Bonito</div>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('admin_deudas') }}" class="btn btn-sm btn-outline-dark fw-bold d-inline-flex align-items-center" style="border-radius: 8px; background-color: #fffaf8;">
+            <i class="bi bi-book me-1"></i> 📔 Libro de Deudas
+        </a>
+        <a href="/logout" class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">🚪 Cerrar Sesión</a>
+    </div>
 </div>
+
 <div class="row mt-4">
-    <!-- Formulario de Carga Izquierdo -->
     <div class="col-md-4 mb-4">
         <div class="p-4 bg-white rounded-3 border shadow-sm" style="border-radius: 15px !important;">
             <h4 class="fw-bold mb-3" style="color: var(--marron-oscuro);">🌸 Cargar Producto</h4>
@@ -22,16 +30,16 @@
                 <div class="mb-3">
                     <label class="form-label small fw-bold">Categoría / Rubro</label>
                     <select name="categoria" class="form-select" required>
-                        <option value="libreria">✏️ Librería</option>
-                        <option value="bazar">🍽️ Bazar</option>
-                        <option value="jugueteria">🧸 Juguetería</option>
-                        <option value="botellas">🥤 Botellas Térmicas</option>
-                        <option value="mate">🧉 Mundo Mate</option>
-                        <option value="maquillaje">💄 Maquillaje y más</option>
-                        <option value="bijuteria">💍 Bijutería</option>
-                        <option value="regaleria">🎁 Regalería</option>
-                        <option value="cotillon">🎉 Cotillón</option>
-                        <option value="otros">✨ Otros Artículos</option>
+                        <option value="Libreria">✏️ Librería</option>
+                        <option value="Bazar">🍽️ Bazar</option>
+                        <option value="Jugueteria">🧸 Juguetería</option>
+                        <option value="Botellas-Termicas">🥤 Botellas Térmicas</option>
+                        <option value="Mundo-Mate">🧉 Mundo Mate</option>
+                        <option value="Maquillaje">💄 Maquillaje y más</option>
+                        <option value="Bijuterio">💍 Bijutería</option>
+                        <option value="Regaleria">🎁 Regalería</option>
+                        <option value="Cotillon">🎉 Cotillón</option>
+                        <option value="Otros-Articulos">✨ Otros Artículos</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -47,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Tabla Derecha de Control de lo cargado -->
     <div class="col-md-8">
         <div class="p-4 bg-white rounded-3 border shadow-sm" style="border-radius: 15px !important;">
             <h4 class="fw-bold mb-3" style="color: var(--marron-oscuro);">📦 Stock en Base de Datos</h4>
@@ -66,8 +73,8 @@
                         <tr>
                             <td><img src="{{ p.imagen_url }}" width="45" height="45" class="rounded shadow-sm" style="object-fit: cover;"></td>
                             <td class="fw-bold" style="font-family: var(--fuente-cuerpo);">{{ p.titulo }}</td>
-                            <td><span class="badge bg-light text-dark border">{{ p.categoria }}</span></td>
-                            <td class="fw-bold" style="color: var(--marron-suave);">${{ p.precio }}</td>
+                            <td><span class="badge bg-light text-dark border">{{ p.categoria.replace('-', ' ') }}</span></td>
+                            <td class="fw-bold" style="color: var(--marron-suave);">${{ p.precio | int }}</td>
                         </tr>
                         {% else %}
                         <tr>
