@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: var(--marron-oscuro);">{{ categoria_titulo }}</h2>
+        <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 15px auto;"></div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        
+        {% for producto in productos %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100 shadow-sm border-0" style="border-radius: 12px; overflow: hidden;">
+                <img src="{{ producto.imagen_url }}" class="card-img-top" alt="{{ producto.titulo }}" style="height: 200px; object-fit: cover;">
+                
+                <div class="card-body text-center d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title fw-bold" style="color: var(--marron-oscuro); font-size: 1.1rem;">{{ producto.titulo }}</h5>
+                        <p class="card-text text-muted small">{{ producto.descripcion }}</p>
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-success fw-bold fs-5 mb-2">${{ producto.precio | int }}</p>
+                        
+                        <button class="btn btn-bonito w-100" onclick="agregarAlCarrito('{{ producto.titulo }}', '{{ producto.precio | int }}')">
+                            <i class="bi bi-cart-plus me-2"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center my-5">
+            <p class="text-muted fs-5">🌸 Próximamente cargaremos los productos de esta colección. ¡Volvé prontito!</p>
+            <a href="/#rubros" class="btn btn-sm btn-outline-secondary mt-2" style="border-radius:20px;">Ver otras colecciones</a>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

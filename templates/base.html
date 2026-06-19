@@ -31,6 +31,9 @@
                     <a class="nav-link px-3" href="{{ url_for('inicio') }}">Inicio</a>
                     <a class="nav-link px-3" href="{{ url_for('inicio', _anchor='rubros') }}">Rubros</a>
                     <a class="nav-link px-3" href="{{ url_for('contacto') }}">Contacto</a>
+                    <a class="nav-link px-3" href="{{ url_for('carrito') }}">
+                        <i class="bi bi-cart3"></i> Mi Carrito
+                    </a>
                 </div>
             </div>
         </div>
@@ -77,5 +80,33 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function agregarAlCarrito(nombre, precio) {
+        // 1. Obtener el carrito actual o crear uno vacío si no existe
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        // 2. Revisar si el producto ya estaba en el carrito
+        const productoExistente = carrito.find(item => item.nombre === nombre);
+
+        if (productoExistente) {
+            // Si ya existe, le sumamos 1 a la cantidad
+            productoExistente.cantidad += 1;
+        } else {
+            // Si es nuevo, lo agregamos a la lista con cantidad 1
+            carrito.push({
+                nombre: nombre,
+                precio: parseInt(precio),
+                cantidad: 1
+            });
+        }
+
+        // 3. Guardar el carrito actualizado en la memoria
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        // 4. Cartel de aviso visual (puedes mejorarlo con Bootstrap después)
+        alert(`¡Sumaste "${nombre}" al carrito!`);
+    }
+</script>
+
 </body>
 </html>

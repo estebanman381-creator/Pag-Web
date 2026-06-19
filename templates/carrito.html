@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: var(--marron-oscuro);">Mi Carrito de Compras</h2>
+        <div style="width: 50px; height: 2px; background-color: var(--rosa-oscuro); margin: 10px auto;"></div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-8">
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 15px;">
+                <div id="contenedor-carrito">
+                    <p class="text-muted text-center my-4">Cargando productos...</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <h5 class="fw-bold m-0" style="color: var(--marron-oscuro);">Total Estimado:</h5>
+                    <h4 class="fw-bold m-0 text-success" id="total-carrito">$0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 15px; background-color: #fffaf8;">
+                <h4 class="fw-bold mb-3" style="color: var(--marron-oscuro); font-size: 1.3rem;">Datos para el Pedido</h4>
+                <form id="formulario-pedido">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label text-muted small fw-bold">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre" required style="border-radius: 8px;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label text-muted small fw-bold">Teléfono de Contacto</label>
+                        <input type="tel" class="form-control" id="telefono" placeholder="Ej: 1123456789" required style="border-radius: 8px;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comentarios" class="form-label text-muted small fw-bold">Notas o aclaraciones (Opcional)</label>
+                        <textarea class="form-control" id="comentarios" rows="2" placeholder="Ej: Preferencias de colores, horarios de entrega..." style="border-radius: 8px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 py-2 fw-bold shadow-sm d-flex align-items-center justify-content-center" style="border-radius: 10px;">
+                        <i class="bi bi-whatsapp me-2"></i> Enviar Pedido por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tu número de WhatsApp comercial (reemplazalo por el tuyo real con código de país, sin espacios ni el +)
+    // Ejemplo para Argentina: 549 + área sin el 15 + número (Ej: 5491123456789)
+    const NUMERO_WHATSAPP = "5491123456789"; 
+
+    function cargarCarrito() {
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const contenedor = document.getElementById('contenedor-carrito');
+        const totalTxt = document.getElementById('total-carrito');
+        
+        if (carrito.length === 0) {
+            contenedor.innerHTML = `
+                <div class="text-center my-4">
+                    <i class="bi bi-cart-x text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-2">Tu carrito está vacío. ¡Explorá nuestras colecciones para sumar artículos!</p>
+                    <a href="/#rubros" class="btn btn-sm btn-outline-secondary mt-2" style="border-radius:20px;">Ver Rubros</a>
+                </div>
+            `;
+            totalTxt.innerText = "$0";
+            return;
+        }
+
+        let html = '<div class="table-responsive"><table class="table align-middle"><tbody>';
+        let total = 0;
+
+        carrito.forEach((prod, index) => {
+            const subtotal = prod.precio * prod.cantidad;
+            total += subtotal;
+            html += `
+                <tr>
+                    <td class="fw-bold" style="color: var(--marron-oscuro);">${prod.nombre}</td>
+                    <td class="text-muted">x${prod.cantidad}</td>
+                    <td class="text-end fw-semibold">$${subtotal}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm text-danger border-0" onclick="eliminarItem(${index})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += '</tbody></table></div>';
+        contenedor.innerHTML = html;
+        totalTxt.innerText = "$" + total;
+    }
+
+    function eliminarItem(index) {
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.splice(index, 1);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        cargarCarrito();
+    }
+
+    document.getElementById('formulario-pedido').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        
+        if (carrito.length === 0) {
+            alert("Tu carrito está vacío.");
+            return;
+        }
+
+        const nombre = document.getElementById('nombre').value;
+        const telefono = document.getElementById('telefono').value;
+        const comentarios = document.getElementById('comentarios').value;
+
+        // Armar el texto para WhatsApp
+        let mensaje = `Hola Todo Bonito! 🌸 *Nuevo Pedido*\n\n`;
+        mensaje += `*Datos del Cliente:*\n`;
+        mensaje += `👤 Nombre: ${nombre}\n`;
+        mensaje += `📞 Teléfono: ${telefono}\n`;
+        if(comentarios) {
+            mensaje += `📝 Notas: ${comentarios}\n`;
+        }
+        mensaje += `\n*Productos del Pedido:*\n`;
+        
+        let total = 0;
+        carrito.forEach(prod => {
+            const subtotal = prod.precio * prod.cantidad;
+            total += subtotal;
+            mensaje += `▪️ ${prod.nombre} (x${prod.cantidad}) - $${subtotal}\n`;
+        });
+        
+        mensaje += `\n💰 *Total Estimado: $${total}*`;
+
+        // Codificar texto para la URL
+        const urlMensaje = encodeURIComponent(mensaje);
+        const urlWhatsapp = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${urlMensaje}`;
+
+        // Vaciar el carrito tras confirmar (opcional, da mejor experiencia)
+        localStorage.removeItem('carrito');
+
+        // Abrir pestaña de WhatsApp
+        window.open(urlWhatsapp, '_blank');
+        
+        // Refrescar para mostrar carrito vacío
+        window.location.reload();
+    });
+
+    // Inicializar al cargar la página
+    document.addEventListener('DOMContentLoaded', cargarCarrito);
+</script>

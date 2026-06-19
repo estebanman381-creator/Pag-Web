@@ -111,6 +111,24 @@ def admin():
     productos = Producto.query.all()
     return render_template('admin.html', productos=productos)
 
+# --- 🏷️ RUTA DINÁMICA PARA LOS RUBROS ---
+@app.route('/rubro/<nombre_categoria>')
+def mostrar_rubro(nombre_categoria):
+    try:
+        # Filtra los productos cuya categoría coincida exactamente con la de la URL
+        productos_filtrados = Producto.query.filter_by(categoria=nombre_categoria).all()
+    except Exception as e:
+        print(f"Error al filtrar productos: {e}")
+        productos_filtrados = []
+    
+    # Reemplazamos guiones por espacios solo para mostrar un título estético arriba
+    titulo_estetico = nombre_categoria.replace('-', ' ').title()
+    
+    return render_template('rubro.html', productos=productos_filtrados, categoria_titulo=titulo_estetico)
+
+@app.route('/carrito')
+def carrito():
+    return render_template('carrito.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
