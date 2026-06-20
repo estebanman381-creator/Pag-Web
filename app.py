@@ -40,7 +40,7 @@ class Deudor(db.Model):
 class HistorialDeuda(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     deudor_id = db.Column(db.Integer, db.ForeignKey('deudor.id'), nullable=False)
-    fecha = db.Column(db.DateTime, default=datetime.now)
+    fecha = db.Column(db.DateTime, default=datetime.now)  # <--- ¡Acá le sacamos los ()!
     descripcion = db.Column(db.String(200), nullable=False)
     monto = db.Column(db.Float, nullable=False)
 
