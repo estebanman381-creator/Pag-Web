@@ -49,7 +49,7 @@ class Deudor(db.Model):
 class HistorialDeuda(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     deudor_id = db.Column(db.Integer, db.ForeignKey('deudor.id'), nullable=False)
-    fecha = db.Column(db.DateTime, default=datetime.now)  # <--- ¡Acá le sacamos los ()!
+    fecha = db.Column(db.DateTime, default=datetime.now)
     descripcion = db.Column(db.String(200), nullable=False)
     monto = db.Column(db.Float, nullable=False)
 
@@ -136,53 +136,14 @@ def admin():
     return render_template('admin.html', productos=productos)
 
 
-# --- 🏷️ RUTA DINÁMICA PARA LOS RUBROS ---
-@app.route('/rubro/<nombre_categoria>')
-def mostrar_rubro(nombre_categoria):
-    try:
-        productos_filtrados = Producto.query.filter_by(categoria=nombre_categoria).all()
-    except Exception as e:
-        print(f"Error al filtrar productos: {e}")
-        productos_filtrados = []
-    
-    titulo_estetico = nombre_categoria.replace('-', ' ').title()
-    return render_template('rubro.html', productos=productos_filtrados, categoria_titulo=titulo_estetico)
-
-
-# --- 🛒 RUTA DEL CARRITO ---
-@app.route('/carrito')
-def carrito():
-    return render_template('carrito.html')
-
-
-# --- 📑 VISTA GENERAL DE DEUDAS (PROTEGIDA) ---
-@app.route('/admin/deudas', methods=['GET', 'POST'])
-def admin_deudas():
-    if not session.get('admin_logueado'):
-        return redirect(url_for('login'))
-
-    if request.method == 'POST':
-        nombre = request.form.get('nombre').strip()
-        telefono = request.form.get('telefono').strip()
-        
-        existe = Deudor.query.filter_by(nombre=nombre).first()
-        if not existe and nombre:
-            nuevo_deudor = Deudor(nombre=nombre, telefono=telefono)
-            db.session.add(nuevo_deudor)
-            db.session.commit()
-        return redirect(url_for('admin_deudas'))
-
-    deudores = Deudor.query.all()
-    return render_template('admin_deudas.html', deudores=deudores)
-
-
 # --- 🔍 DETALLE, FECHAS, PAGOS Y AGREGAR DEUDA ---
 @app.route('/admin/deudas/<int:id>', methods=['GET', 'POST'])
 def detalle_deuda(id):
     if not session.get('admin_logueado'):
         return redirect(url_for('login'))
 
-    cliente = Deudor.query.get_or_400(id)
+    # CORREGIDO AQUÍ: De 'get_or_400' a 'get_or_404'
+    cliente = Deudor.query.get_or_404(id)
 
     if request.method == 'POST':
         tipo_movimiento = request.form.get('tipo')
@@ -210,6 +171,65 @@ def detalle_deuda(id):
         return redirect(url_for('detalle_deuda', id=cliente.id))
 
     return render_template('detalle_deuda.html', cliente=cliente)
+
+
+# --- 📑 VISTA GENERAL DE DEUDAS (PROTEGIDA) ---
+@app.route('/admin/deudas', methods=['GET', 'POST'])
+def admin_deudas():
+    if not session.get('admin_logueado'):
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        nombre = request.form.get('nombre').strip()
+        telefono = request.form.get('telefono').strip()
+        
+        existe = Deudor.query.filter_by(nombre=nombre).first()
+        if not existe and nombre:
+            nuevo_deudor = Deudor(nombre=nombre, telefono=telefono)
+            db.session.add(nuevo_deudor)
+            db.session.commit()
+        return redirect(url_for('admin_deudas'))
+
+    deudores = Deudor.query.all()
+    return render_template('admin_deudas.html', deudores=deudores)
+
+
+# --- RUTA PARA ELIMINAR UN PRODUCTO ---
+@app.route('/admin/eliminar/<int:id>', methods=['POST'])
+def eliminar_producto(id):
+    if not session.get('admin_logueado'):
+        return redirect(url_for('login'))
+        
+    # CORREGIDO AQUÍ: De 'get_or_400' a 'get_or_404'
+    producto = Producto.query.get_or_404(id)
+    try:
+        db.session.delete(producto)
+        db.session.commit()
+        flash('Producto eliminado correctamente.', 'success')
+    except Exception as e:
+        print(f"Error al eliminar producto: {e}")
+        flash('No se pudo eliminar el producto.', 'danger')
+        
+    return redirect(url_for('admin'))
+
+
+# --- 🏷️ RUTA DINÁMICA PARA LOS RUBROS ---
+@app.route('/rubro/<nombre_categoria>')
+def mostrar_rubro(nombre_categoria):
+    try:
+        productos_filtrados = Producto.query.filter_by(categoria=nombre_categoria).all()
+    except Exception as e:
+        print(f"Error al filtrar productos: {e}")
+        productos_filtrados = []
+    
+    titulo_estetico = nombre_categoria.replace('-', ' ').title()
+    return render_template('rubro.html', productos=productos_filtrados, categoria_titulo=titulo_estetico)
+
+
+# --- 🛒 RUTA DEL CARRITO ---
+@app.route('/carrito')
+def carrito():
+    return render_template('carrito.html')
 
 
 if __name__ == '__main__':
