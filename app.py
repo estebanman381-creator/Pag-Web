@@ -8,8 +8,17 @@ import cloudinary.uploader
 app = Flask(__name__)
 app.secret_key = 'todo_bonito_clave_secreta'
 
-# Configuración de la Base de Datos (SQLite)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todobonito.db'
+# Configuración de la Base de Datos (PostgreSQL en Render / SQLite en tu compu)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    # Render suele dar URLs que empiezan con 'postgres://', pero SQLAlchemy necesita 'postgresql://'
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todobonito.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
