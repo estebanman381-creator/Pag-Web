@@ -66,6 +66,7 @@
                             <th>Nombre</th>
                             <th>Categoría</th>
                             <th>Precio</th>
+                            <th class="text-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,10 +76,17 @@
                             <td class="fw-bold" style="font-family: var(--fuente-cuerpo);">{{ p.titulo }}</td>
                             <td><span class="badge bg-light text-dark border">{{ p.categoria.replace('-', ' ') }}</span></td>
                             <td class="fw-bold" style="color: var(--marron-suave);">${{ p.precio | int }}</td>
+                            <td class="text-end">
+                                <form action="{{ url_for('eliminar_producto', id=p.id) }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar «{{ p.titulo }}»? Esto no se puede deshacer.');" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius: 6px;">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No hay productos cargados todavía. ¡Empezá usando el formulario!</td>
+                            <td colspan="5" class="text-center text-muted py-4">No hay productos cargados todavía. ¡Empezá usando el formulario!</td>
                         </tr>
                         {% endfor %}
                     </tbody>
