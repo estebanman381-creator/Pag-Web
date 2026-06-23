@@ -29,16 +29,24 @@ cloudinary.config(
   api_secret = "JzxF3utVFgxgb8i1odH-dIobw9c"
 )
 
-# Modelo de la tabla de Productos
+# --- 📸 MODELOS ACTUALIZADOS PARA MÚLTIPLES FOTOS ---
+
 class Producto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float, nullable=False)
     descripcion = db.Column(db.String(200))
     categoria = db.Column(db.String(50), nullable=False)
-    imagen_url = db.Column(db.String(300))
+    # Relación con la nueva tabla de imágenes (elimina huérfanos al borrar un producto)
+    imagenes = db.relationship('ImagenProducto', backref='producto', lazy=True, cascade="all, delete-orphan")
 
-# --- 📓 NUEVOS MODELOS PARA EL LIBRO DE DEUDAS ---
+class ImagenProducto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    producto_id = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
+    url = db.Column(db.String(300), nullable=False)
+
+
+# --- 📓 MODELOS PARA EL LIBRO DE DEUDAS ---
 class Deudor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False, unique=True)
@@ -98,7 +106,7 @@ def logout():
     return redirect(url_for('inicio'))
 
 
-# --- PANEL DE ADMINISTRACIÓN PROTEGIDO ---
+# --- PANEL DE ADMINISTRACIÓN PROTEGIDO (REFORMADO PARA RECIBIR MUCHAS IMÁGENES) ---
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if not session.get('admin_logueado'):
@@ -109,27 +117,36 @@ def admin():
         precio = request.form.get('precio')
         descripcion = request.form.get('descripcion')
         categoria = request.form.get('categoria')
-        foto = request.files.get('foto')
-
-        imagen_url = "https://via.placeholder.com/300"
-
-        if foto and foto.filename != '':
-            try:
-                upload_result = cloudinary.uploader.upload(foto)
-                imagen_url = upload_result['secure_url']
-            except Exception as e:
-                print(f"Error al subir imagen: {e}")
+        
+        # Agarra la lista completa de fotos seleccionadas
+        fotos = request.files.getlist('foto')
 
         nuevo_producto = Producto(
             titulo=titulo, 
             precio=float(precio), 
             descripcion=descripcion, 
-            categoria=categoria, 
-            imagen_url=imagen_url
+            categoria=categoria
         )
         db.session.add(nuevo_producto)
-        db.session.commit()
+        db.session.flush() # Sincroniza para obtener el ID asignado al producto
+
+        fotos_subidas = 0
+        for foto in fotos:
+            if foto and foto.filename != '':
+                try:
+                    upload_result = cloudinary.uploader.upload(foto)
+                    nueva_imagen = ImagenProducto(producto_id=nuevo_producto.id, url=upload_result['secure_url'])
+                    db.session.add(nueva_imagen)
+                    fotos_subidas += 1
+                except Exception as e:
+                    print(f"Error al subir imagen a Cloudinary: {e}")
         
+        # Si no cargaron ninguna foto, asigna un marcador de posición
+        if fotos_subidas == 0:
+            imagen_defecto = ImagenProducto(producto_id=nuevo_producto.id, url="https://via.placeholder.com/300")
+            db.session.add(imagen_defecto)
+
+        db.session.commit()
         return redirect(url_for('admin'))
 
     productos = Producto.query.all()
@@ -142,8 +159,7 @@ def detalle_deuda(id):
     if not session.get('admin_logueado'):
         return redirect(url_for('login'))
 
-    # CORREGIDO AQUÍ: De 'get_or_400' a 'get_or_404'
-    cliente = Deudor.query.get_or_404(id)
+    cliente = Deudor.query.get_or_44(id) if hasattr(Deudor.query, 'get_or_44') else Deudor.query.get_or_404(id)
 
     if request.method == 'POST':
         tipo_movimiento = request.form.get('tipo')
@@ -200,7 +216,6 @@ def eliminar_producto(id):
     if not session.get('admin_logueado'):
         return redirect(url_for('login'))
         
-    # CORREGIDO AQUÍ: De 'get_or_400' a 'get_or_404'
     producto = Producto.query.get_or_404(id)
     try:
         db.session.delete(producto)
