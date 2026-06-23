@@ -47,8 +47,8 @@
                     <textarea name="descripcion" class="form-control" rows="2" placeholder="Detalles, colores, etc..."></textarea>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label small fw-bold">Foto Real</label>
-                    <input type="file" name="foto" class="form-control" accept="image/*">
+                    <label class="form-label small fw-bold">Fotos Reales (Podés elegir varias)</label>
+                    <input type="file" name="foto" class="form-control" accept="image/*" multiple>
                 </div>
                 <button type="submit" class="btn btn-bonito w-100 py-2">Guardar Producto</button>
             </form>
@@ -72,7 +72,13 @@
                     <tbody>
                         {% for p in productos %}
                         <tr>
-                            <td><img src="{{ p.imagen_url }}" width="45" height="45" class="rounded shadow-sm" style="object-fit: cover;"></td>
+                            <td>
+                                {% if p.imagenes %}
+                                    <img src="{{ p.imagenes[0].url }}" width="45" height="45" class="rounded shadow-sm" style="object-fit: cover;">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/45" width="45" height="45" class="rounded shadow-sm" style="object-fit: cover;">
+                                {% endif %}
+                            </td>
                             <td class="fw-bold" style="font-family: var(--fuente-cuerpo);">{{ p.titulo }}</td>
                             <td><span class="badge bg-light text-dark border">{{ p.categoria.replace('-', ' ') }}</span></td>
                             <td class="fw-bold" style="color: var(--marron-suave);">${{ p.precio | int }}</td>
