@@ -25,10 +25,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav mx-auto text-center">
+                <div class="navbar-nav mx-auto text-center align-items-center">
                     <a class="nav-link px-3" href="{{ url_for('inicio') }}">Inicio</a>
                     <a class="nav-link px-3" href="{{ url_for('inicio', _anchor='rubros') }}">Rubros</a>
                     <a class="nav-link px-3" href="{{ url_for('contacto') }}">Contacto</a>
+                    
+                    <!-- 💡 NUEVO BOTÓN: Info Compra Web -->
+                    <button class="nav-link px-3 btn btn-link border-0 text-center" data-bs-toggle="modal" data-bs-target="#modalInfoCompra" style="color: inherit; font-size: inherit; font-family: inherit; background: none; vertical-align: middle;">
+                        <i class="bi bi-info-circle me-1"></i> Info Compra Web
+                    </button>
+
                     <a class="nav-link px-3" href="{{ url_for('carrito') }}">
                         <i class="bi bi-cart3"></i> Mi Carrito
                     </a>
@@ -40,6 +46,46 @@
     <div class="container mt-2 mb-5 flex-grow-1">
         {% block content %}
         {% endblock %}
+    </div>
+
+    <!-- 🛍️ VENTANA EMERGENTE (MODAL) DE INFO COMPRA -->
+    <div class="modal fade" id="modalInfoCompra" tabindex="-1" aria-labelledby="modalInfoCompraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 15px;">
+                <div class="modal-header" style="background-color: #fffaf8; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom: 1px solid #eee;">
+                    <h5 class="modal-title fw-bold" id="modalInfoCompraLabel" style="color: var(--marron-oscuro);">🌸 ¿Cómo comprar en nuestra web?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4" style="font-family: var(--fuente-cuerpo); font-size: 0.95rem; line-height: 1.6;">
+                    
+                    <p class="fw-bold text-center mb-3" style="color: var(--marron-suave);">¡Es súper fácil e intuitivo!</p>
+                    
+                    <!-- Podés modificar este texto cuando quieras -->
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <strong style="color: var(--marron-oscuro);">1. Elegí tus productos:</strong> <br>
+                            Navegá por las categorías, buscá lo que te guste y hacé clic en "Agregar al carrito".
+                        </li>
+                        <li class="mb-3">
+                            <strong style="color: var(--marron-oscuro);">2. Revisá tu pedido:</strong> <br>
+                            Entrá a "Mi Carrito" para ajustar las cantidades o revisar el total de tu compra, nosotros te asesoramos sobre modelos seleccionados y stock.
+                        </li>
+                        <li class="mb-3">
+                            <strong style="color: var(--marron-oscuro);">3. Enviá el pedido:</strong> <br>
+                            Al confirmar, la web te guiará para enviar el resumen automáticamente a nuestro WhatsApp y así resibas nuestra atención personalizada para confirmar tu pedido.
+                        </li>
+                        <li class="mb-0">
+                            <strong style="color: var(--marron-oscuro);">4. Coordinamos la entrega:</strong> <br>
+                            Por chat acordamos el método de pago y el retiro por el local o envío.
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-bonito w-100 py-2" data-bs-dismiss="modal" style="border-radius: 8px;">¡Entendido!</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="footer-bonito mt-auto">
